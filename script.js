@@ -50,6 +50,34 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Advanced Formatting & Validation
+    const emailField = document.getElementById('email');
+    const phoneField = document.getElementById('phone');
+    const nipField = document.getElementById('nip');
+
+    // Email Regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailField.value && !emailRegex.test(emailField.value)) {
+      emailField.classList.add('error');
+      valid = false;
+    }
+
+    // Phone Regex (Polish style: +48 or standard 9 digits, spaces allowed)
+    const phoneClean = phoneField.value.replace(/\s+/g, '');
+    const phoneRegex = /^(\+48)?\d{9}$/;
+    if (phoneField.value && !phoneRegex.test(phoneClean)) {
+      phoneField.classList.add('error');
+      valid = false;
+    }
+
+    // NIP Regex (10 digits, dashes allowed)
+    const nipClean = nipField.value.replace(/-/g, '').replace(/\s+/g, '');
+    const nipRegex = /^\d{10}$/;
+    if (nipField.value && !nipRegex.test(nipClean)) {
+      nipField.classList.add('error');
+      valid = false;
+    }
+
     if (valid) {
       const formDataObj = new FormData(form);
       const data = {};
@@ -57,11 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
         data[key] = value;
       });
 
-      // Ensure specific keys are present if needed
+      // Clean data before sending
+      data.phone = phoneField.value.replace(/\s+/g, '');
+      data.nip = nipField.value.replace(/-/g, '').replace(/\s+/g, '');
+
       if (!data.jdg) data.jdg = 'nie podano';
 
       if (data.jdg === 'nie') {
-        alert('Niestety nie kwalifikujesz się do naszej promocji.');
+        alert('Przyjmujemy tylko JDG które rozważają sp. z o.o.');
         return;
       }
 
