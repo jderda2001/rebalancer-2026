@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Wysyłanie...';
 
-        const response = await fetch('https://hook.eu2.make.com/962oireetr4r3nbcms1n2dhd33tdzdug', {
+        const response = await fetch('https://hook.eu2.make.com/o2ys4oyrd7ebk2152qx5ivkby06dbd8j', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
