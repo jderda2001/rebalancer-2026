@@ -60,6 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Ensure specific keys are present if needed
       if (!data.jdg) data.jdg = 'nie podano';
 
+      if (data.jdg === 'nie') {
+        alert('Niestety nie kwalifikujesz się do naszej promocji.');
+        return;
+      }
+
       try {
         submitBtn.disabled = true;
         const originalBtnText = submitBtn.textContent;
