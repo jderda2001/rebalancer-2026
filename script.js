@@ -34,6 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   const modal = document.getElementById('successModal');
 
+  // === Modal Helper ===
+  const showModal = (type, title, message) => {
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+
+    modalIcon.textContent = type === 'success' ? '✅' : 'ℹ️';
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modal.classList.add('active');
+  };
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let valid = true;
@@ -92,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!data.jdg) data.jdg = 'nie podano';
 
       if (data.jdg === 'nie') {
-        alert('Przyjmujemy tylko JDG które rozważają sp. z o.o.');
+        showModal('info', 'Informacja', 'Przyjmujemy tylko JDG które rozważają sp. z o.o.');
         return;
       }
 
@@ -110,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          modal.classList.add('active');
+          showModal('success', 'Dziękujemy!', 'Twoje zgłoszenie zostało wysłane. Nasz doradca skontaktuje się z Tobą w ciągu 24 godzin.');
           form.reset();
           document.querySelectorAll('.radio-opt').forEach(l => l.classList.remove('selected'));
         } else {
