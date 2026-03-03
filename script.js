@@ -38,28 +38,31 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     let valid = true;
     const submitBtn = form.querySelector('.submit-btn');
+    const fieldsToValidate = ['name', 'phone', 'email', 'nip', 'revenue'];
+
     form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
 
-    ['name', 'phone', 'email', 'nip'].forEach(id => {
-      const input = document.getElementById(id);
-      if (!input.value.trim()) { input.classList.add('error'); valid = false; }
+    fieldsToValidate.forEach(id => {
+      const field = document.getElementById(id);
+      if (!field || !field.value.trim()) {
+        if (field) field.classList.add('error');
+        valid = false;
+      }
     });
 
-    const revenue = document.getElementById('revenue');
-    if (!revenue.value) { revenue.classList.add('error'); valid = false; }
-
     if (valid) {
-      const formData = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        nip: document.getElementById('nip').value,
-        revenue: document.getElementById('revenue').value,
-        jdg: form.querySelector('input[name="jdg"]:checked')?.value || 'nie podano'
-      };
+      const formDataObj = new FormData(form);
+      const data = {};
+      formDataObj.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Ensure specific keys are present if needed
+      if (!data.jdg) data.jdg = 'nie podano';
 
       try {
         submitBtn.disabled = true;
+        const originalBtnText = submitBtn.textContent;
         submitBtn.textContent = 'Wysyłanie...';
 
         const response = await fetch('https://hook.eu2.make.com/o2ys4oyrd7ebk2152qx5ivkby06dbd8j', {
@@ -67,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(data),
         });
 
         if (response.ok) {
@@ -75,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset();
           document.querySelectorAll('.radio-opt').forEach(l => l.classList.remove('selected'));
         } else {
-          alert('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
+          alert('Wystąpił błąd podczas wysyłania formularza. Status: ' + response.status);
         }
       } catch (error) {
         console.error('Error submitting form:', error);

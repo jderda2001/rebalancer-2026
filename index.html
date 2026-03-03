@@ -312,15 +312,16 @@
         Twojej firmy.</p>
       <div class="form-card reveal d2">
         <form id="contactForm" novalidate>
-          <div class="field"><label for="name">Imię i Nazwisko *</label><input type="text" id="name"
+          <div class="field"><label for="name">Imię i Nazwisko *</label><input type="text" id="name" name="name"
               placeholder="Jan Kowalski" required></div>
-          <div class="field"><label for="phone">Numer telefonu *</label><input type="tel" id="phone"
+          <div class="field"><label for="phone">Numer telefonu *</label><input type="tel" id="phone" name="phone"
               placeholder="+48 600 000 000" required></div>
-          <div class="field"><label for="email">E-mail *</label><input type="email" id="email"
+          <div class="field"><label for="email">E-mail *</label><input type="email" id="email" name="email"
               placeholder="jan@kowalski.pl" required></div>
-          <div class="field"><label for="nip">NIP Firmy *</label><input type="text" id="nip" placeholder="000-000-00-00"
-              required></div>
-          <div class="field"><label for="revenue">Miesięczny obrót firmy *</label><select id="revenue" required>
+          <div class="field"><label for="nip">NIP Firmy *</label><input type="text" id="nip" name="nip"
+              placeholder="000-000-00-00" required></div>
+          <div class="field"><label for="revenue">Miesięczny obrót firmy *</label><select id="revenue" name="revenue"
+              required>
               <option value="" disabled selected>Wybierz przedział</option>
               <option value="do30">do 30 tys. zł</option>
               <option value="30-50">30–50 tys. zł</option>
