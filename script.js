@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = form.querySelector('.submit-btn');
     form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
 
-    ['name', 'phone', 'nip'].forEach(id => {
+    ['name', 'phone', 'email', 'nip'].forEach(id => {
       const input = document.getElementById(id);
       if (!input.value.trim()) { input.classList.add('error'); valid = false; }
     });
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
         nip: document.getElementById('nip').value,
         revenue: document.getElementById('revenue').value,
         jdg: form.querySelector('input[name="jdg"]:checked')?.value || 'nie podano'
