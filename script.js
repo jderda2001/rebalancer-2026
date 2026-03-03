@@ -34,9 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   const modal = document.getElementById('successModal');
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let valid = true;
+    const submitBtn = form.querySelector('.submit-btn');
     form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
 
     ['name', 'phone', 'nip'].forEach(id => {
@@ -48,9 +49,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!revenue.value) { revenue.classList.add('error'); valid = false; }
 
     if (valid) {
-      modal.classList.add('active');
-      form.reset();
-      document.querySelectorAll('.radio-opt').forEach(l => l.classList.remove('selected'));
+      const formData = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        nip: document.getElementById('nip').value,
+        revenue: document.getElementById('revenue').value,
+        jdg: form.querySelector('input[name="jdg"]:checked')?.value || 'nie podano'
+      };
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wysyłanie...';
+
+        const response = await fetch('https://hook.eu2.make.com/962oireetr4r3nbcms1n2dhd33tdzdug', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          modal.classList.add('active');
+          form.reset();
+          document.querySelectorAll('.radio-opt').forEach(l => l.classList.remove('selected'));
+        } else {
+          alert('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Wystąpił błąd połączenia. Spróbuj ponownie później.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Wyślij i poznaj oszczędności →';
+      }
     }
   });
 
