@@ -90,6 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
       valid = false;
     }
 
+    // Consent Checkboxes (both required to submit)
+    const consentIds = ['consentPhone', 'consentEmail'];
+    consentIds.forEach(id => {
+      const field = document.getElementById(id);
+      if (!field || !field.checked) {
+        if (field) field.closest('.consent-opt').classList.add('error');
+        valid = false;
+      }
+    });
+
     if (valid) {
       const formDataObj = new FormData(form);
       const data = {};

@@ -703,6 +703,64 @@ h2 {
   color: var(--navy);
 }
 
+.consent-group {
+  margin-bottom: 16px;
+}
+
+.consent-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.2s var(--ease);
+}
+
+.consent-opt:last-child {
+  margin-bottom: 0;
+}
+
+.consent-opt:hover {
+  border-color: var(--border-hover);
+}
+
+.consent-opt input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin-top: 2px;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+
+.consent-opt span {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.consent-opt span a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 2px;
+}
+
+.consent-opt span a:hover {
+  color: var(--gold);
+}
+
+.consent-opt.error {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
 .submit-btn {
   width: 100%;
   padding: 14px;
@@ -926,4 +984,85 @@ footer {
   .nav-logo img {
     height: 26px;
   }
+
+  .legal-page {
+    padding: 120px 0 60px;
+  }
+}
+
+/* === LEGAL PAGE === */
+.legal-page {
+  padding: 160px 0 100px;
+}
+
+.legal-header {
+  max-width: 720px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.legal-updated {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: -8px;
+}
+
+.legal-content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-content section {
+  margin-bottom: 44px;
+}
+
+.legal-content section:last-child {
+  margin-bottom: 0;
+}
+
+.legal-content h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.legal-content p {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.legal-content p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-content ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}
+
+.legal-content a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 2px;
+}
+
+.legal-content a:hover {
+  color: var(--gold);
+}
+
+.legal-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
