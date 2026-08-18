@@ -9,6 +9,71 @@
     content="Profesjonalna optymalizacja podatkowa dla rentownych firm. Przekształć JDG w Spółkę z o.o. i zredukuj obciążenia do 9,08%. Kancelaria Rebalancer.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Układ dwukolumnowy formularza — do przeniesienia na koniec styles.css -->
+  <style>
+    .form-card .form-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+      text-align: left;
+    }
+
+    .form-col {
+      min-width: 0;
+    }
+
+    .form-col-title {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #6B7280;
+      margin: 0 0 16px;
+    }
+
+    .consent-panel {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+    }
+
+    .consent-all {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+      font-weight: 600;
+      font-size: .88rem;
+    }
+
+    .consent-panel .consent-opt {
+      font-size: .78rem;
+      line-height: 1.5;
+    }
+
+    .form-split .submit-btn {
+      margin-top: 18px;
+    }
+
+    .form-split .form-note {
+      margin-top: 12px;
+    }
+
+    @media (max-width:900px) {
+      .form-card .form-split {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -311,50 +376,66 @@
       <p class="section-desc reveal d1">Wypełnij formularz, a nasz doradca przygotuje bezpłatną symulację dopasowaną do
         Twojej firmy.</p>
       <div class="form-card reveal d2">
-        <form id="contactForm" novalidate>
-          <div class="field"><label for="name">Imię i Nazwisko *</label><input type="text" id="name" name="name"
-              placeholder="Jan Kowalski" required></div>
-          <div class="field"><label for="phone">Numer telefonu *</label><input type="tel" id="phone" name="phone"
-              placeholder="+48 600 000 000" required></div>
-          <div class="field"><label for="email">E-mail *</label><input type="email" id="email" name="email"
-              placeholder="jan@kowalski.pl" required></div>
-          <div class="field"><label for="nip">NIP Firmy *</label><input type="text" id="nip" name="nip"
-              placeholder="000-000-00-00" required></div>
-          <div class="field"><label for="revenue">Miesięczny obrót firmy *</label><select id="revenue" name="revenue"
-              required>
-              <option value="" disabled selected>Wybierz przedział</option>
-              <option value="do30">do 30 tys. zł</option>
-              <option value="30-50">30–50 tys. zł</option>
-              <option value="50-200">50–200 tys. zł</option>
-              <option value="200+">powyżej 200 tys. zł</option>
-            </select></div>
-          <div class="field"><label>Czy prowadzisz JDG i rozważasz sp. z o.o.?</label>
-            <div class="radio-row"><label class="radio-opt"><input type="radio" name="jdg" value="tak">Tak</label><label
-                class="radio-opt"><input type="radio" name="jdg" value="nie">Nie</label></div>
+        <form id="contactForm" class="form-split" novalidate>
+
+          <!-- LEWA KOLUMNA — dane -->
+          <div class="form-col">
+            <p class="form-col-title">Twoje dane</p>
+            <div class="field"><label for="name">Imię i Nazwisko *</label><input type="text" id="name" name="name"
+                placeholder="Jan Kowalski" required></div>
+            <div class="field"><label for="phone">Numer telefonu *</label><input type="tel" id="phone" name="phone"
+                placeholder="+48 600 000 000" required></div>
+            <div class="field"><label for="email">E-mail *</label><input type="email" id="email" name="email"
+                placeholder="jan@kowalski.pl" required></div>
+            <div class="field"><label for="nip">NIP Firmy *</label><input type="text" id="nip" name="nip"
+                placeholder="000-000-00-00" required></div>
+            <div class="field"><label for="revenue">Miesięczny obrót firmy *</label><select id="revenue" name="revenue"
+                required>
+                <option value="" disabled selected>Wybierz przedział</option>
+                <option value="do30">do 30 tys. zł</option>
+                <option value="30-50">30–50 tys. zł</option>
+                <option value="50-200">50–200 tys. zł</option>
+                <option value="200+">powyżej 200 tys. zł</option>
+              </select></div>
+            <div class="field"><label>Czy prowadzisz JDG i rozważasz sp. z o.o.?</label>
+              <div class="radio-row"><label class="radio-opt"><input type="radio" name="jdg"
+                    value="tak">Tak</label><label class="radio-opt"><input type="radio" name="jdg"
+                    value="nie">Nie</label></div>
+            </div>
           </div>
-          <div class="field consent-group">
-            <label class="consent-all"><input type="checkbox" id="consentAll"><span>Zaznacz wszystkie zgody</span></label>
-            <label class="consent-opt"><input type="checkbox" id="consentPhone" name="consentPhone" required><span>Wyrażam
-                zgodę na przetwarzanie moich danych osobowych przez firmę adGen w celu kontaktu telefonicznego, w tym
-                przesyłania informacji handlowych i marketingowych, zgodnie z <a href="polityka-prywatnosci.html"
-                  target="_blank" rel="noopener noreferrer">Polityką Prywatności</a>. *</span></label>
-            <label class="consent-opt"><input type="checkbox" id="consentEmail" name="consentEmail" required><span>Wyrażam
-                zgodę na przetwarzanie moich danych osobowych przez firmę adGen w celu kontaktu drogą elektroniczną
-                (e-mail), w tym przesyłania informacji handlowych i marketingowych, zgodnie z
-                <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką
-                  Prywatności</a>. *</span></label>
-            <label class="consent-opt"><input type="checkbox" id="consentPartners" name="consentPartners"
-                required><span>Akceptuję <a href="polityka-prywatnosci.html" target="_blank"
-                  rel="noopener noreferrer">Politykę Prywatności</a> adGen sp. z o.o. oraz <a href="regulamin.html"
-                  target="_blank" rel="noopener noreferrer">Regulamin</a> i wyrażam zgodę na przetwarzanie moich danych
-                osobowych przez adGen sp. z o.o. z siedzibą w Katowicach w celu ich przekazania partnerom biznesowym
-                współpracującym z adGen sp. z o.o. w branży finansowej, którzy mogą kontaktować się ze mną w celu
-                przedstawienia swoich ofert handlowych. Zgoda jest dobrowolna i mogę ją w każdej chwili wycofać.
-                Szczegóły dotyczące przetwarzania danych oraz kategorii odbiorców znajdują się w Polityce Prywatności
-                adGen. *</span></label>
+
+          <!-- PRAWA KOLUMNA — zgody i wysyłka -->
+          <div class="form-col">
+            <p class="form-col-title">Zgody</p>
+            <div class="consent-panel">
+              <label class="consent-all"><input type="checkbox" id="consentAll"><span>Zaznacz wszystkie
+                  zgody</span></label>
+              <div class="consent-group">
+                <label class="consent-opt"><input type="checkbox" id="consentPhone" name="consentPhone"
+                    required><span>Wyrażam zgodę na przetwarzanie moich danych osobowych przez firmę adGen w celu
+                    kontaktu telefonicznego, w tym przesyłania informacji handlowych i marketingowych, zgodnie z <a
+                      href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką
+                      Prywatności</a>. *</span></label>
+                <label class="consent-opt"><input type="checkbox" id="consentEmail" name="consentEmail"
+                    required><span>Wyrażam zgodę na przetwarzanie moich danych osobowych przez firmę adGen w celu
+                    kontaktu drogą elektroniczną (e-mail), w tym przesyłania informacji handlowych i marketingowych,
+                    zgodnie z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką
+                      Prywatności</a>. *</span></label>
+                <label class="consent-opt"><input type="checkbox" id="consentPartners" name="consentPartners"
+                    required><span>Akceptuję <a href="polityka-prywatnosci.html" target="_blank"
+                      rel="noopener noreferrer">Politykę Prywatności</a> adGen sp. z o.o. oraz <a href="regulamin.html"
+                      target="_blank" rel="noopener noreferrer">Regulamin</a> i wyrażam zgodę na przetwarzanie moich
+                    danych osobowych przez adGen sp. z o.o. z siedzibą w Katowicach w celu ich przekazania partnerom
+                    biznesowym współpracującym z adGen sp. z o.o. w branży finansowej, którzy mogą kontaktować się ze mną
+                    w celu przedstawienia swoich ofert handlowych. Zgoda jest dobrowolna i mogę ją w każdej chwili
+                    wycofać. Szczegóły dotyczące przetwarzania danych oraz kategorii odbiorców znajdują się w Polityce
+                    Prywatności adGen. *</span></label>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Wyślij i poznaj oszczędności →</button>
+            <p class="form-note">🔒 Przekształcenie za 1 zł netto przy wyborze obsługi księgowej.</p>
           </div>
-          <button type="submit" class="submit-btn">Wyślij i poznaj oszczędności →</button>
-          <p class="form-note">🔒 Przekształcenie za 1 zł netto przy wyborze obsługi księgowej.</p>
+
         </form>
       </div>
     </div>
@@ -365,7 +446,8 @@
     <div class="container">
       <div class="footer-logo"><img src="logo.png" alt="Rebalancer Kancelaria"></div>
       <p class="footer-tagline">Optymalizacja podatkowa dla ambitnych przedsiębiorców.</p>
-      <div class="footer-links"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a href="#">Regulamin</a></div>
+      <div class="footer-links"><a href="polityka-prywatnosci.html">Polityka prywatności</a><a
+          href="regulamin.html">Regulamin</a></div>
       <p class="footer-copy">© 2026 Rebalancer Kancelaria. Wszelkie prawa zastrzeżone.</p>
     </div>
   </footer>
