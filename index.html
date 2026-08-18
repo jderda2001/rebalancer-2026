@@ -333,6 +333,7 @@
                 class="radio-opt"><input type="radio" name="jdg" value="nie">Nie</label></div>
           </div>
           <div class="field consent-group">
+            <label class="consent-all"><input type="checkbox" id="consentAll"><span>Zaznacz wszystkie zgody</span></label>
             <label class="consent-opt"><input type="checkbox" id="consentPhone" name="consentPhone" required><span>Wyrażam
                 zgodę na przetwarzanie moich danych osobowych przez firmę adGen w celu kontaktu telefonicznego, w tym
                 przesyłania informacji handlowych i marketingowych, zgodnie z <a href="polityka-prywatnosci.html"
@@ -342,6 +343,15 @@
                 (e-mail), w tym przesyłania informacji handlowych i marketingowych, zgodnie z
                 <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką
                   Prywatności</a>. *</span></label>
+            <label class="consent-opt"><input type="checkbox" id="consentPartners" name="consentPartners"
+                required><span>Akceptuję <a href="polityka-prywatnosci.html" target="_blank"
+                  rel="noopener noreferrer">Politykę Prywatności</a> adGen sp. z o.o. oraz <a href="regulamin.html"
+                  target="_blank" rel="noopener noreferrer">Regulamin</a> i wyrażam zgodę na przetwarzanie moich danych
+                osobowych przez adGen sp. z o.o. z siedzibą w Katowicach w celu ich przekazania partnerom biznesowym
+                współpracującym z adGen sp. z o.o. w branży finansowej, którzy mogą kontaktować się ze mną w celu
+                przedstawienia swoich ofert handlowych. Zgoda jest dobrowolna i mogę ją w każdej chwili wycofać.
+                Szczegóły dotyczące przetwarzania danych oraz kategorii odbiorców znajdują się w Polityce Prywatności
+                adGen. *</span></label>
           </div>
           <button type="submit" class="submit-btn">Wyślij i poznaj oszczędności →</button>
           <p class="form-note">🔒 Przekształcenie za 1 zł netto przy wyborze obsługi księgowej.</p>
@@ -371,6 +381,32 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- Obsługa „Zaznacz wszystkie zgody" -->
+  <script>
+    (function () {
+      var all = document.getElementById('consentAll');
+      if (!all) return;
+      var boxes = ['consentPhone', 'consentEmail', 'consentPartners']
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+
+      all.addEventListener('change', function () {
+        boxes.forEach(function (b) {
+          if (b.checked !== all.checked) {
+            b.checked = all.checked;
+            b.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+
+      boxes.forEach(function (b) {
+        b.addEventListener('change', function () {
+          all.checked = boxes.every(function (x) { return x.checked; });
+        });
+      });
+    })();
+  </script>
 </body>
 
 </html>
